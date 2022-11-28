@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- https://getbootstrap.com/docs/4.0/examples/ -->
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+      $('#dataRekamMedik').DataTable();
+      });
+    </script>
+    <title>Rumah Sakit PNJ</title>
+  </head>
+  <body>
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">RUMAH SAKIT PNJ</a>
+      <input class="form-control form-control-dark w-100" id="dataRekamMedik" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="{{url_for('logout')}}">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <span data-feather="home"></span>
+                  Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('perawat')}}">
+                  <span data-feather="file"></span>
+                  Perawat
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('kamar')}}">
+                  <span data-feather="file-text"></span>
+                  Kamar
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('pasien')}}">
+                  <span data-feather="users"></span>
+                  Pasien
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('obat')}}">
+                  <span data-feather="bar-chart-2"></span>
+                  Obat
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('dokter')}}">
+                  <span data-feather="layers"></span>
+                  Dokter
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('spesialis')}}">
+                  <span data-feather="users"></span>
+                  Spesialis
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+            
+            
+
+          </div>
+
+           <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <!-- /.row -->
+          <div class="row">
+            <div class="col-12">
+
+                
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Rekam Medis</h3>
+  
+                <!-- Button trigger modal -->
+        
+ <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"><i class="nav-icon fas fa-plus"></i>
+    Tambah
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Jadwal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{sukses}}
+          <form action="{{url_for('create')}}" method="post" id="quickForm">
+            
+            <div class="card-body">
+              <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Tanggal</label>
+                <input type="date" name="tanggal" class="form-control" placeholder="">
+              </div>
+              <div class="form-group mb-3">
+                <label for="exampleInputPassword1">Keluhan</label>
+                <input type="text" name="keluhan" class="form-control" placeholder="">
+              </div>
+              <div class="form-group mb-3">
+                <label for="exampleInputPassword1">Pemeriksaan</label>
+                <input type="text" name="pemeriksaan" class="form-control" placeholder="">
+              </div>
+              <div class="form-group mb-3">
+                <label for="exampleInputPassword1">Pengobatan</label>
+                <input type="text" name="pengobatan" class="form-control" placeholder="">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-success">Kirim</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover text-nowrap" id="dataRekamMedik" style="text-align: center;">
+                    <thead>
+                      <tr class="bg bg-success text-white">
+                        <th>ID Rekam Medis</th>
+                        <th>Tanggal</th>
+                        <th>Keluhan</th>
+                        <th>Pemeriksaan</th>
+                        <th>Pengobatan</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {%for item in kalimat%}
+                      <tr>
+                        <td>{{item[0]}}</td>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>  
+                          <a class="btn btn-warning" data-toggle="modal" data-target="#modalEdit{{ item[0] }}" href="#!"><i class="nav-icon fas fa-edit"></i> Edit</a>
+                          <a class="btn btn-danger" href="/hapus/{{ item[0] }}" role="button" onclick="return confirm('Yakin mau dihapus bous???');"><i class="nav-icon fas fa-trash"></i> Hapus</a>
+                        </td>
+                      </tr>
+                       <!-- Modal -->
+                       <div class="modal fade" id="modalEdit{{ item[0] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              {{sukses}}
+                              <form action="{{url_for('update')}}" method="post" id="quickForm">
+                                <div class="card-body">
+                                  <div class="form-group mb-3">
+                                    <input type="hidden" name="id_rekam_medis" value="{{ item[0] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputEmail1">Tanggal</label>
+                                    <input type="date" name="tanggal" value="{{ item[1] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputPassword1">Keluhan</label>
+                                    <input type="text" name="keluhan" value="{{ item[2] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputPassword1">Pemeriksaan</label>
+                                    <input type="text" name="pemeriksaan" value="{{ item[3] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputPassword1">Pengobatan</label>
+                                    <input type="text" name="pengobatan" value="{{ item[4] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-success">Edit</button>
+                                  </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {%endfor%}
+                      
+                     
+                    
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+        </main>
+      </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          datasets: [{
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

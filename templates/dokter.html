@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- https://getbootstrap.com/docs/4.0/examples/ -->
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css">
+
+    <title>Rumah Sakit PNJ</title>
+  </head>
+  <body>
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">RUMAH SAKIT PNJ</a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="{{url_for('login')}}">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('dashboard')}}">
+                  <span data-feather="home"></span>
+                  Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{url_for('perawat')}}">
+                  <span data-feather="file"></span>
+                  Perawat 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{url_for('kamar')}}">
+                  <span data-feather="file-text"></span>
+                  Kamar 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{url_for('pasien')}}">
+                  <span data-feather="users"></span>
+                  Pasien 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{{url_for('obat')}}">
+                  <span data-feather="bar-chart-2"></span>
+                  Obat 
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <span data-feather="layers"></span>
+                  Dokter <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('spesialis')}}">
+                  <span data-feather="users"></span>
+                  Spesialis
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+            
+            
+
+          </div>
+
+           <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <!-- /.row -->
+          <div class="row">
+            <div class="col-12">
+
+                
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Dokter</h3>
+  
+                <!-- Button trigger modal -->
+        
+ <button type="button" class="btn btn-primary " data-toggle="modal" >
+    <a style="color: white; text-decoration: none;" href="{{url_for('dokterCreate')}}">Tambah Data</a>
+  </button>
+  {{spesialis}}
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dokter</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>{{sukses}}</p>
+          <form action="{{url_for('createDokter')}}" method="post" id="quickForm">
+            
+            <div class="card-body">
+              <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Nama Dokter</label>
+                <input type="text" name="nama_dokter" class="form-control" placeholder="">
+              </div>
+              <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Spesialis</label>
+                <select class="form-select" type="text" aria-label="Default select example" name="id_spesialis">
+                  {% for item in kalimat %}                  
+                  <option value="{{ item[0] }}">{{ item[0] }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Nomor Telepon</label>
+                <input type="tel" name="no_telp" class="form-control" placeholder="">
+              </div>
+              
+              <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Alamat</label>
+                <input type="text" name="alamat" class="form-control" placeholder="">
+              </div>
+              <label for="exampleInputEmail1">Shift</label><br>
+              <div class="form-check"> 
+                <input class="form-check-input" type="checkbox" value="Pagi" name="pagi" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Pagi
+                </label><br>
+                <input class="form-check-input" type="checkbox" value="Siang" name="pagi" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Siang
+                </label><br>
+                <input class="form-check-input" type="checkbox" value="Sore" name="pagi" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Malam
+                </label>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-success">Kirim</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover text-nowrap" style="text-align: center;">
+                    <thead>
+                      <tr class="bg bg-success text-white">
+                        <th>ID Dokter</th>
+                        <th>Nama Dokter</th>
+                        <th>Spesialis</th>
+                        <th>Nomor Telepon</th>
+                        <th>Alamat</th>
+                        <th>Shift</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {%for item in kalimat%}
+                      <tr>
+                        <td>{{item[0]}}</td>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>{{item[5]}}</td>
+                        <td>  
+                          <a class="btn btn-warning" data-toggle="modal" data-target="#modalEdit{{ item[0] }}" href="#!"><i class="nav-icon fas fa-edit"></i> Edit</a>
+                          <a class="btn btn-danger" href="/hapusDokter/{{ item[0] }}" role="button" onclick="return confirm('Yakin mau dihapus bous???');"><i class="nav-icon fas fa-trash"></i> Hapus</a>
+                        </td>
+                      </tr>
+                       <!-- Modal -->
+                       <div class="modal fade" id="modalEdit{{ item[0] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              {{sukses}}
+                              <form action="{{url_for('updateDokter')}}" method="post" id="quickForm">
+                                <div class="card-body">
+                                  <div class="form-group mb-3">
+                                    <input type="hidden" name="id_dokter" value="{{ item[0] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputEmail1">Nama Dokter</label>
+                                    <input type="text" name="nama_dokter" value="{{ item[1] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <!-- <div class="form-group mb-3">
+                                    <label for="exampleInputPassword1">Jenis Kelamin</label>
+                                    <input type="text" name="keluhan" value="{{ item[2] }}" class="form-control" placeholder="">
+                                  </div> -->
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputEmail1">Spesialis</label>
+                                    <input type="text" name="id_spesialis" value="{{ item[2] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputEmail1">Nomor Telepon</label>
+                                    <input type="tel" name="no_telp" value="{{ item[3] }}" class="form-control" placeholder="">
+                                  </div>
+                                  <div class="form-group mb-3">
+                                    <label for="exampleInputEmail1">Alamat</label>
+                                    <input type="text" name="alamat" value="{{ item[4] }}" class="form-control" placeholder="">
+                                  </div>
+                                    </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                                    <button type="submit" class="btn btn-success">Edit</button>
+                                  </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {%endfor%}
+                      
+                     
+                    
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          datasets: [{
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
