@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Scan') {
             steps {
-                withSonarQubeEnv(installationName: 'sq1') { 
+                withSonarQubeEnv('sq1') { 
                     sh '''
                     sonar-scanner \
                     -Dsonar.projectKey=sq1 \
@@ -14,7 +14,7 @@ pipeline {
                     -Dsonar.language=py \
                     -Dsonar.python.version=3.x \
                     -Dsonar.host.url=http://10.10.141.175:9000 \
-                    -Dsonar.login=${{ env.JENKINS_PYTHON_TOKEN }}  # Replace with your environment variable if needed
+                    -Dsonar.login=squ_d2767690cdcc9507fde5c5a572278a20e390c707
                     '''
                 }
             }
