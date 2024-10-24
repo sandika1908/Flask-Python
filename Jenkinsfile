@@ -4,7 +4,7 @@ pipeline {
         stage('Scan Code Quality') {
             steps {
                 withSonarQubeEnv('sq1') {
-                    withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                    withCredentials([string(credentialsId: 'jenkins-python', variable: 'JENKINS_PYTHON')]) {
                         sh '''
                         export PATH=/opt/sonar-scanner/bin:$PATH
                         sonar-scanner \
