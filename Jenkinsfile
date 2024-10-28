@@ -6,6 +6,7 @@ pipeline {
                 withSonarQubeEnv('sonar01') {
                     withCredentials([string(credentialsId: 'sonartoken', variable: 'SONARTOKEN')]) {
                         sh '''
+                        which sonar-scanner
                         export PATH=/opt/sonar-scanner/bin:$PATH
                         sonar-scanner \
                         -Dsonar.projectKey=sq1 \
