@@ -12,7 +12,7 @@ pipeline {
                         -Dsonar.projectKey=sq1 \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://54.144.78.8:9000 \
-                        -Dsonar.login=$SONARTOKEN
+                        -Dsonar.login=$SONAR-TOKEN
                         '''
                     }
                 }
